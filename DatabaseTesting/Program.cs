@@ -7,11 +7,9 @@ namespace DatabaseTesting
     {
         static void Main(string[] args)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
-
             try
             {
-                var programOptions = new ProgramOptions(true);
+                var programOptions = new ProgramOptions();
 
                 foreach (var a in args)
                 {
