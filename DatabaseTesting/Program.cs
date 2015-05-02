@@ -39,12 +39,24 @@ namespace DatabaseTesting
             }
             catch (Exception e)
             {
-                var messageBox = new ExceptionMessageBox(e);
-                messageBox.ShowDialog();
+                if (IsCritical(e))
+                    throw;
+
+                new ExceptionMessageBox(e).ShowDialog();
             }
 
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
+        }
+
+        static bool IsCritical(Exception e)
+        {
+            return e is OutOfMemoryException ||
+                   e is AppDomainUnloadedException ||
+                   e is BadImageFormatException ||
+                   e is CannotUnloadAppDomainException ||
+                   e is InvalidProgramException ||
+                   e is System.Threading.ThreadAbortException;
         }
     }
 }
